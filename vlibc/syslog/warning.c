@@ -10,16 +10,8 @@
 #define PROGRAM_NAME "vlibc"
 #endif
 
-int
-pwarning(const char *message)
-{
-  fprintf(stderr, "%s%s%s: %swarning%s: %s\n", WHITE, PROGRAM_NAME, RESET,
-          PURPLE, RESET, message);
-  return 0;
-}
-
 void
-pwarningf(const char *format, ...)
+warning(const char *format, ...)
 {
   va_list args;
   va_start(args, format);

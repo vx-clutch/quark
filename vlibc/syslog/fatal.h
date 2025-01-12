@@ -5,10 +5,7 @@
 #define FATAL_H
 
 void
-pfatal(const char *message);
-
-void
-pfatalf(const char *format, ...);
+fatal(const char *format, ...);
 
 #endif
 

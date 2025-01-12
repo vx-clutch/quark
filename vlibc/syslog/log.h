@@ -10,10 +10,7 @@
 #define FAIL 3,
 
 void
-plog(int status, const char *message);
-
-void
-plogf(int status, const char *format, ...);
+log(int status, const char *format, ...);
 
 #endif
 

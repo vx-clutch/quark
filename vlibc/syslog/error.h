@@ -4,15 +4,8 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#include <stdio.h>
-
-#define perror __perror
-
 int
-__perror(const char *message);
-
-void
-perrorf(const char *format, ...);
+error(const char *format, ...);
 
 #endif
 

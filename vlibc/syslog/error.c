@@ -4,21 +4,14 @@
 #include "error.h"
 #include "colors.h"
 #include <stdarg.h>
+#include <stdio.h>
 
 #ifndef PROGRAM_NAME
 #define PROGRAM_NAME "vlibc"
 #endif
 
 int
-__perror(const char *message)
-{
-  fprintf(stderr, "%s%s%s: %serror%s: %s\n", WHITE, PROGRAM_NAME, RESET, RED,
-          RESET, message);
-  return 0;
-}
-
-void
-perrorf(const char *format, ...)
+error(const char *format, ...)
 {
   va_list args;
   va_start(args, format);
@@ -27,6 +20,7 @@ perrorf(const char *format, ...)
   vfprintf(stderr, format, args);
   fprintf(stderr, "\n");
   va_end(args);
+  return 1;
 }
 
 /* vlibc is a simple stand-like library.

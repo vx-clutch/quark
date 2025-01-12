@@ -7,27 +7,7 @@
 #include <stdio.h>
 
 void
-plog(int status, const char *message)
-{
-  switch (status)
-  {
-  case 0:
-    printf("[ %sINFO%s ] %s\n", PURPLE, RESET, message);
-    break;
-  case 1:
-    printf("[ %sOKAY%s ] %s\n", GREEN, RESET, message);
-    break;
-  case 2:
-    printf("[ %sWARN%s ] %s\n", YELLOW, RESET, message);
-    break;
-  case 3:
-    printf("[ %sFAIL%s ] %s\n", RED, RESET, message);
-    break;
-  }
-}
-
-void
-plogf(int status, const char *format, ...)
+log(int status, const char *format, ...)
 {
   va_list args;
   va_start(args, format);

@@ -4,11 +4,8 @@
 #ifndef WARNING_H
 #define WARNING_H
 
-int
-pwarning(const char *message);
-
 void
-pwarningf(const char *format, ...);
+warning(const char *format, ...);
 
 #endif
 

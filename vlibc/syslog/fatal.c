@@ -12,15 +12,7 @@
 #endif
 
 void
-pfatal(const char *message)
-{
-  fprintf(stderr, "%s%s%s: %sfatal error%s: %s\ncompilation terminated.\n",
-          WHITE, PROGRAM_NAME, RESET, RED, RESET, message);
-  exit(EXIT_FAILURE);
-}
-
-void
-pfatalf(const char *format, ...)
+fatal(const char *format, ...)
 {
   va_list args;
   va_start(args, format);
