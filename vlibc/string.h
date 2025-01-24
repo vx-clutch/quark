@@ -2,6 +2,8 @@
 #define VLIBC_STRING_H
 
 #include <stdio.h>
+#include <stdlib.h>
+
 typedef struct
 {
   char *value;
@@ -9,20 +11,34 @@ typedef struct
 } string;
 
 static string
-newString(char *str)
+newString(char *src)
 {
   int length = 0;
-  for (;;) {
-    if (str[length] != '\0') {
+  for (;;)
+  {
+    if (src[length] != '\0')
+    {
       length++;
       continue;
     }
     break;
   }
   string buf;
-  buf.value = str;
+  buf.value = src;
   buf.length = length;
   return buf;
+}
+
+static string
+strcat(string dest, string src)
+{
+  char *d = dest.value;
+  while (*d) d++;
+  while ((*d++ = *src.value++));
+  return (string){
+      .value = dest.value,
+      .length = dest.length + src.length,
+  };
 }
 
 #endif
