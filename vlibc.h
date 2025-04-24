@@ -110,9 +110,9 @@ typedef enum {
 #define _logf(l, s, ...) logf(l, s, __VA_ARGS__)
 #endif
 
-static int mixin(logf)(__level_t level, char *src, ...) {
+static int mixin(logf)(__level_t level, string_t src, ...) {
   va_list args;
-  va_start(args, src);
+  va_start(args, src.to_str);
   switch (level) {
     _vlibc_case(ok, VLIBC_GREEN);
     _vlibc_case(error, VLIBC_RED);
@@ -120,7 +120,7 @@ static int mixin(logf)(__level_t level, char *src, ...) {
     _vlibc_case(info, VLIBC_PURPLE);
     _vlibc_case(fatal, VLIBC_RED);
   }
-  vfprintf(stderr, src, args);
+  vfprintf(stderr, src.to_str, args);
   printf("\n");
   va_end(args);
   return 0;
