@@ -19,6 +19,7 @@ def vlibc_man(page):
     match page:
         case "string_t": print("string_t is a string used by the vlibc library. It has two fields `to_str` and `len`" + g("string_t src = new_string(\"Hello, World!\");"))
         case "logf": print("logf() is a function used for general purpose printing to the user. It takes at least two arguments. A level, see level_t, and a format. It can also have a variable ammount of extra arguemnts as long as format has format specifier. All output from logf() is sent to stderr" + g("logf(OK \"hello, World!\");"))
+        case "level_t": print("level_t is a internal type used in vlibc. It is intented that the uses called it through the macros of OK, ERR, WARN, INFO, and FATAL." + g("logf(OK \"\Hello, World!");"))
         case _: print(f"No manual entry for {page}")
    
 if len(sys.argv) < 2: vlibc_help()
