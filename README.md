@@ -8,4 +8,5 @@ Enables short names. It does this by removeing the preifx of 'vlibc_'
 ## Functions
 ### vlibc_logf(__level_t, _vlibc_string_t, ...)
 Takes in the levels of OK, ERR, WARN, INFO, FATAL
-`vlibc_logf(OK "Hello, VLIBC!");`
+
+Ex: `vlibc_logf(OK "Hello, VLIBC!");`
