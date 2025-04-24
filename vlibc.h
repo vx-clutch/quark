@@ -84,18 +84,18 @@ static const char *VLIBC_PURPLE = "[0;95m";
 static const char *VLIBC_WHITE = "[0;97m";
 
 // __level_t mappings
-#define OK _ok,
-#define ERR _error,
-#define WARN _warn,
-#define INFO _info,
-#define FATAL _fatal,
+#define OK ok,
+#define ERR error,
+#define WARN warn,
+#define INFO info,
+#define FATAL fatal,
 
 typedef enum {
-  _ok,
-  _error,
-  _warn,
-  _info,
-  _fatal,
+  ok,
+  error,
+  warn,
+  info,
+  fatal,
 } __level_t;
 
 #define _vlibc_case(message, level_color)                                       \
@@ -114,13 +114,13 @@ static int mixin(logf)(__level_t level, char *src, ...) {
   va_list args;
   va_start(args, src);
   switch (level) {
-    _vlibc_case(_ok, VLIBC_GREEN);
-    _vlibc_case(_error, VLIBC_RED);
-    _vlibc_case(_warn, VLIBC_YELLOW);
-    _vlibc_case(_info, VLIBC_PURPLE);
-    _vlibc_case(_fatal, VLIBC_RED);
+    _vlibc_case(ok, VLIBC_GREEN);
+    _vlibc_case(error, VLIBC_RED);
+    _vlibc_case(warn, VLIBC_YELLOW);
+    _vlibc_case(info, VLIBC_PURPLE);
+    _vlibc_case(fatal, VLIBC_RED);
   }
-  fvprintf(stderr, src, args);
+  vfprintf(stderr, src, args);
   printf("\n");
   va_end(args);
   return 0;
