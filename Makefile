@@ -1,10 +1,10 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror -std=c99
-SRCS=vlibc.c
+SRCS=quark.c
 
 all: build
 
-build: vlibc.c vlibc.h
+build: quark.c quark.h
 	$(CC) $(CFLAGS) -o test $(SRCS)
 
 test: build
