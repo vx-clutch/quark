@@ -3,7 +3,7 @@
 
 #ifndef QUARK_SHORT
 #define _mixin_concat(a, b) a##b
-#define mixin(name) _mixin_concat(quark_, name)
+#define mixin(name) _mixin_concat(q_, name)
 #else
 #define mixin(name) name
 #endif
