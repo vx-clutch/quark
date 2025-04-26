@@ -71,9 +71,8 @@ static _vlibc_string_t mixin(strcpy)(_vlibc_string_t dest,
 #define _strcat(d, s) strcat(d, s)
 #endif
 
-static _vlibc_string_t mixin(strcat)(_vlibc_string_t dest,
-                                     _vlibc_string_t src) {
-}
+/*static _vlibc_string_t mixin(strcat)(_vlibc_string_t dest,*/
+/*                                     _vlibc_string_t src) {}*/
 
 // Logging
 static const char *VLIBC_RESET = "[0m";
@@ -98,7 +97,7 @@ typedef enum {
   fatal,
 } __level_t;
 
-#define _vlibc_case(message, level_color)                                       \
+#define _vlibc_case(message, level_color)                                      \
   case message:                                                                \
     fprintf(stderr, "%s%s%s: %s" #message "%s: ", VLIBC_WHITE, VLIBC_PACKAGE,  \
             VLIBC_RESET, level_color, VLIBC_RESET);                            \
@@ -110,7 +109,7 @@ typedef enum {
 #define _logf(l, s, ...) logf(l, s, __VA_ARGS__)
 #endif
 
-static int mixin(logf)(__level_t level, string_t src, ...) {
+static int mixin(logf)(__level_t level, _vlibc_string_t src, ...) {
   va_list args;
   va_start(args, src.to_str);
   switch (level) {

@@ -2,12 +2,12 @@
 #include "vlibc.h"
 
 int main(void) {
-  string_t str = new_string("Hello ");
-  strcat(str, s("World!"));
-  vlibc_logf(OK "vlibc");
-  vlibc_logf(ERR "vlibc");
-  vlibc_logf(WARN "vlibc");
-  vlibc_logf(INFO "vlibc");
-  vlibc_logf(FATAL "vlibc");
+  vlibc_string_t str = vlibc_new_string("Hello ");
+  /*vlibc_strcat(str, s("World!"));*/
+  vlibc_logf(OK s("vlibc"));
+  vlibc_logf(ERR s("vlibc"));
+  vlibc_logf(WARN s("vlibc"));
+  vlibc_logf(INFO s("vlibc"));
+  vlibc_logf(FATAL s("vlibc"));
   return 0;
 }
