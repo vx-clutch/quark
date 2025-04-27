@@ -2,9 +2,7 @@
 Entries marked with a '*' are require for compelation.
 ## Defines
 ### QUARK_PACKAGE*
-The name of the program
-### QUARK_SHORT
-Enables short names. It does this by removeing the preifx of 'q_'
+The name of the program. Used in q_logf()
 ## Types
 ### q_string_t
 Custom string type that improves saftey, and makes them easier to work with.

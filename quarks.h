@@ -1,13 +1,6 @@
 #ifndef QUARK_H
 #define QUARK_H
 
-#ifndef QUARK_SHORT
-#define _mixin_concat(a, b) a##b
-#define mixin(name) _mixin_concat(q_, name)
-#else
-#define mixin(name) name
-#endif
-
 #ifndef QUARK_PACKAGE
 #error "macro `QUARK_PACKAGE` not defined. Store the name of the package here."
 #endif
@@ -21,23 +14,9 @@
 typedef struct {
   char *to_str;
   int len;
-}
+} q_string_t;
 
-#ifndef QUARK_SHORT
-quark_string_t;
-#else
-string_t;
-#endif
-
-#ifndef QUARK_SHORT
-#define _quark_string_t quark_string_t
-#define s(s) quark_new_string(s)
-#else
-#define _quark_string_t string_t
-#define s(s) new_string(s)
-#endif
-
-static _quark_string_t mixin(new_string)(char *src) {
+static q_string_t new_string(char *src) {
   int length = 0;
   for (;;) {
     if (src[length] != '\0') {
@@ -46,33 +25,20 @@ static _quark_string_t mixin(new_string)(char *src) {
     }
     break;
   }
-  _quark_string_t buf;
+  q_string_t buf;
   buf.to_str = src;
   buf.len = length;
   return buf;
 }
 
-#ifndef QUARK_SHORT
-#define _strcpy(d, s) quark_strcpy(d, s)
-#else
-#define _strcpy(d, s) strcpy(d, s)
-#endif
-
-static _quark_string_t mixin(strcpy)(_quark_string_t dest,
-                                     _quark_string_t src) {
+static q_string_t strcpy(q_string_t dest, q_string_t src) {
   dest.to_str = src.to_str;
   dest.len = src.len;
   return dest;
 }
 
-#ifndef QUARK_SHORT
-#define _strcat(d, s) quark_strcat(d, s)
-#else
-#define _strcat(d, s) strcat(d, s)
-#endif
-
-/*static _quark_string_t mixin(strcat)(_quark_string_t dest,*/
-/*                                     _quark_string_t src) {}*/
+/*static q_string_t strcat)(q_string_t dest,*/
+/*                                     q_string_t src) {}*/
 
 // Logging
 static const char *QUARK_RESET = "[0m";
@@ -103,13 +69,7 @@ typedef enum {
             QUARK_RESET, level_color, QUARK_RESET);                            \
     break;
 
-#ifndef QUARK_SHORT
-#define _logf(l, s, ...) quark_logf(l, s, __VA_ARGS__)
-#else
-#define _logf(l, s, ...) logf(l, s, __VA_ARGS__)
-#endif
-
-static int mixin(logf)(__level_t level, _quark_string_t src, ...) {
+static int logf(__level_t level, q_string_t src, ...) {
   va_list args;
   va_start(args, src.to_str);
   switch (level) {
@@ -124,10 +84,6 @@ static int mixin(logf)(__level_t level, _quark_string_t src, ...) {
   va_end(args);
   return 0;
 }
-
-#ifndef QUARK_SHORT
-#undef s
-#endif
 
 #undef mixin
 #undef _mixin_concat
