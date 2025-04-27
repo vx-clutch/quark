@@ -1,7 +1,6 @@
 #ifndef QUARK_H
 #define QUARK_H
 
-
 // Strings
 typedef struct {
   char *as_str;
@@ -40,12 +39,16 @@ typedef enum {
 } q_level_t;
 
 int q_logf_string(q_level_t, q_string_t, ...);
-int q_logf_char(q_level_t, char*, ...);
+int q_logf_char(q_level_t, char *, ...);
 
-#define q_logf(level, str, ...) _Generic((str), \
-    q_string_t*: q_logf_string, \
-    char*: q_logf_char \
-)(level, str, ##__VA_ARGS__)
+#define q_logf(level, str, ...)                                                \
+  _Generic((str), q_string_t *: q_logf_string, char *: q_logf_char)(           \
+      level, str, ##__VA_ARGS__)
 
+// Files
+int q_write_string(q_string_t, q_string_t, ...);
+int q_write_char(char *, char *, ...);
+int q_mkdir_string(q_string_t);
+int q_mkdir_char(char *);
 
 #endif
