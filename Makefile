@@ -1,11 +1,9 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -std=c99
-SRCS=quark.c
+CFLAGS=-Wall -Wextra -std=c11 -shared -fPIC
+SRCS=$(wildcard libq/*.c)
+LIB=libq.so
 
-all: build
-
-build: quark.c quark.h
-	$(CC) $(CFLAGS) -o test $(SRCS)
-
-test: build
-	./test && rm test
+$(LIB): $(SRCS) quarks.h
+	@-mkdir bin
+	$(CC) -o $@ $(CFLAGS) $(SRCS)
+	mv $(LIB) bin/

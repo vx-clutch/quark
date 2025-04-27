@@ -1,13 +1,12 @@
 #define QUARK_PACKAGE "test-frame"
-#include "quark.h"
+#include "quarks.h"
 
 int main(void) {
-  quark_string_t str = quark_new_string("Hello ");
-  /*quark_strcat(str, s("World!"));*/
-  quark_logf(OK s("quark"));
-  quark_logf(ERR s("quark"));
-  quark_logf(WARN s("quark"));
-  quark_logf(INFO s("quark"));
-  quark_logf(FATAL s("quark"));
+  q_string_t str = q_new_string("Hello ");
+  q_logf_char(OK "quark");
+  q_logf_char(ERR "quark");
+  q_logf_char(WARN "quark");
+  q_logf_char(INFO "quark");
+  q_logf_char(FATAL "quark");
   return 0;
 }
