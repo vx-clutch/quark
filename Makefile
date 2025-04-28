@@ -1,28 +1,29 @@
 CC = gcc
-CFLAGS = -std=c11 -fPIC
+CFLAGS = -std=c23 -fPIC
 SRCS = $(wildcard libq/*.c)
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:libq/%.c=bin/obj/%.o)
 
 all: bindir libq.so libq.a
 
 bindir:
-	@mkdir -p bin/share
-	@mkdir -p bin/archive
-	@mkdir -p bin/obj
+	@mkdir -p bin/share bin/archive bin/obj
 
-libq.so: $(SRCS) quarks.h
-	$(CC) -shared $(CFLAGS) -o bin/share/libq.so $(SRCS)
+bin/obj/%.o: libq/%.c quarks.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+libq.so: $(OBJS)
+	$(CC) -shared $(CFLAGS) -o bin/share/libq.so $(OBJS)
 
 libq.a: $(OBJS)
 	ar rcs bin/archive/libq.a $(OBJS)
 
-libq/%.o: libq/%.c quarks.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
-	rm -rf bin
-	find libq -name '*.o' -delete
+	@-rm -rf bin
+	@-rm main
+	@-rm $(OBJS)
 
-test: main.c
-	gcc -o main main.c -Lbin/share -lq -Wl,-rpath=bin/share
-
+test: main.c all
+	@$(CC) -o main main.c -Lbin/share -lq -Wl,-rpath=bin/share
+	@echo
+	@./main
+	@rm main

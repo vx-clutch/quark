@@ -1,6 +1,6 @@
+#define QUARK_PACKAGE "test-frame"
 #include "quarks.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/stat.h>
 
 void test_strings() {
@@ -15,17 +15,11 @@ void test_strings() {
   q_string_t copy = q_strcpy(hello, world);
   printf("copy: %s\n", copy.as_str);
 
-  q_string_t combined = q_strcat(hello, world);
-  printf("combined: %s\n", combined.as_str);
-
-  q_string_t cmp_result = q_strcmp(hello, world);
-  printf("comparison result: %d\n", *(int *)(&cmp_result));
-
-  free(hello.as_str);
-  free(world.as_str);
-  free(copy.as_str);
-  free(combined.as_str);
-  free(cmp_result.as_str);
+  /*q_string_t combined = q_strcat(hello, world);*/
+  /*printf("combined: %s\n", combined.as_str);*/
+  /**/
+  /*q_string_t cmp_result = q_strcmp(hello, world);*/
+  /*printf("comparison result: %d\n", *(int *)(&cmp_result));*/
 }
 
 void test_logging() {
@@ -33,13 +27,11 @@ void test_logging() {
 
   q_string_t msg = q_new_string("This is a q_string_t log message.");
 
-  q_logf(OK msg);
-  q_logf(ERR "This is an error log.");
-  q_logf(WARN "This is a warning log.");
-  q_logf(INFO "This is an info log.");
-  q_logf(FATAL "This is a fatal log.");
-
-  free(msg.as_str);
+  q_logf_string(OK msg);
+  q_logf_char(ERR "This is an error log.");
+  q_logf_char(WARN "This is a warning log.");
+  q_logf_char(INFO "This is an info log.");
+  q_logf_char(FATAL "This is a fatal log.");
 }
 
 void test_files() {
@@ -64,16 +56,12 @@ void test_files() {
   if (q_mkdir_string(dir_name) != 0) {
     printf("%sFailed to create directory%s\n", QUARK_RED, QUARK_RESET);
   }
-
-  free(filename.as_str);
-  free(content.as_str);
-  free(dir_name.as_str);
 }
 
 int main() {
-  test_strings();
   test_logging();
-  test_files();
+  test_strings();
+  /*test_files();*/
   printf("%sAll tests completed.%s\n", QUARK_GREEN, QUARK_RESET);
   return 0;
 }

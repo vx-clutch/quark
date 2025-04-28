@@ -9,8 +9,8 @@ typedef struct {
 
 q_string_t q_new_string(char *);
 q_string_t q_strcpy(q_string_t, q_string_t);
-q_string_t q_strcat(q_string_t, q_string_t);
-q_string_t q_strcmp(q_string_t, q_string_t);
+/*q_string_t q_strcat(q_string_t, q_string_t);*/
+/*q_string_t q_strcmp(q_string_t, q_string_t);*/
 
 // Logging
 #ifndef QUARK_PACKAGE
@@ -41,9 +41,11 @@ typedef enum {
 int q_logf_string(q_level_t, q_string_t, ...);
 int q_logf_char(q_level_t, char *, ...);
 
-#define q_logf(level, str, ...)                                                \
-  _Generic((str), q_string_t *: q_logf_string, char *: q_logf_char)(           \
-      level, str, ##__VA_ARGS__)
+#define q_logf(x, ...)                                                         \
+  _Generic((x),                                                                \
+      q_string_t: q_logf_string,                                               \
+      char *: q_logf_char,                                                     \
+      const char *: q_logf_char)(x, __VA_ARGS__)
 
 // Files
 int q_write_string(q_string_t, q_string_t, ...);
