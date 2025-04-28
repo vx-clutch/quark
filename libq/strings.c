@@ -15,8 +15,8 @@ q_string_t q_new_string(char *src) {
   return buf;
 }
 
-q_string_t q_strcpy(q_string_t dest, q_string_t src) {
-  dest.as_str = src.as_str;
-  dest.len = src.len;
-  return dest;
+q_string_t q_strcpy(q_string_t *dest, q_string_t *src) {
+  dest->as_str = src->as_str;
+  dest->len = src->len;
+  return *dest;
 }

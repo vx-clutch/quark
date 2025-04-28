@@ -12,7 +12,7 @@ void test_strings() {
   printf("hello: %s (len %d)\n", hello.as_str, hello.len);
   printf("world: %s (len %d)\n", world.as_str, world.len);
 
-  q_string_t copy = q_strcpy(hello, world);
+  q_string_t copy = q_strcpy(&hello, &world);
   printf("copy: %s\n", copy.as_str);
 
   /*q_string_t combined = q_strcat(hello, world);*/
