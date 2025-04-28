@@ -482,10 +482,29 @@
 <body>
     <div class="container">
         <h1>Quark Documentation</h1>
-        <p>This is the Quark page. Welcome!</p>
+        <p>This is the Quark documentation page. Welcome!</p>
+
         <h2>Macros</h2>
-        <h3>Package</h3>
-        <p>The name of the program</p>
+        <h3>QUARK_PACKAGE</h3>
+        <p>The name of your program. If this is not defined, it is set to 'quark' by defaul.t</p>
+
+        <h2>Types</h2>
+        <h3>q_string_t</h3>
+        <p>The string type used by Quark. This type makes working with strings easier. This type has two fields: as_str, and len. See q_new_string().</p>
+        <h3>q_level_t</h3>
+        <p>The logging level enum used by q_logf(). The main way to use this is through the macros of OK, ERR, WARN, INFO, and FATAL.</p>
+
+        <h2>Functions</h2>
+        <h3>Strings</h3>
+        <h4>q_new_string()</h4>
+        <p>This function turns a cstr into q_string_t</p>
+        <pre><code> q_string_t q_new_string(char *);</code></pre>
+        <h4>q_strcpy()</h4>
+        <p>This function copy the second q_string_t into the first one.</p>
+        <pre><code> q_string_t q_strcpy(q_string_t*, q_string_t);</code></pre>
+        <h4>q_strcat()</h4>
+        <p>This function concatenates two strings of type q_string_t. This both returns the concatenated string, and modifies the first one in place.</p>
+        <pre><code> q_string_t q_strcat(q_string_t*, q_string_t);</code></pre>
     </div>
 </body>
 
