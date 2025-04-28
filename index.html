@@ -121,14 +121,6 @@
             }
         }
 
-        nav {
-            column-count: 2;
-            -moz-column-count: 2;
-            -webkit-column-count: 2;
-            font-size: 15px;
-            margin: 0 0 1em 0;
-        }
-
         p {
             margin: 0 0 1em 0;
         }
@@ -490,9 +482,11 @@
 
         <h2>Types</h2>
         <h3>q_string_t</h3>
-        <p>The string type used by Quark. This type makes working with strings easier. This type has two fields: as_str, and len. See q_new_string().</p>
+        <p>The string type used by Quark. This type makes working with strings easier. This type has two fields: as_str,
+            and len. See q_new_string().</p>
         <h3>q_level_t</h3>
-        <p>The logging level enum used by q_logf(). The main way to use this is through the macros of OK, ERR, WARN, INFO, and FATAL.</p>
+        <p>The logging level enum used by q_logf(). The main way to use this is through the macros of OK, ERR, WARN,
+            INFO, and FATAL.</p>
 
         <h2>Functions</h2>
         <h3>Strings</h3>
@@ -503,7 +497,8 @@
         <p>This function copy the second q_string_t into the first one.</p>
         <pre><code> q_string_t q_strcpy(q_string_t*, q_string_t);</code></pre>
         <h4>q_strcat()</h4>
-        <p>This function concatenates two strings of type q_string_t. This both returns the concatenated string, and modifies the first one in place.</p>
+        <p>This function concatenates two strings of type q_string_t. This both returns the concatenated string, and
+            modifies the first one in place.</p>
         <pre><code> q_string_t q_strcat(q_string_t*, q_string_t);</code></pre>
     </div>
 </body>
