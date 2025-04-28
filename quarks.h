@@ -41,12 +41,6 @@ typedef enum {
 int q_logf_string(q_level_t, q_string_t, ...);
 int q_logf_char(q_level_t, char *, ...);
 
-#define q_logf(x, ...)                                                         \
-  _Generic((x),                                                                \
-      q_string_t: q_logf_string,                                               \
-      char *: q_logf_char,                                                     \
-      const char *: q_logf_char)(x, __VA_ARGS__)
-
 // Files
 int q_write_string(q_string_t, q_string_t, ...);
 int q_write_char(char *, char *, ...);
