@@ -13,7 +13,7 @@ def quark_help():
 
 
 def quark_doc():
-    html_path = os.path.join(os.getcwd(), 'doc', 'std.html')
+    html_path = os.path.join(os.getcwd(), 'doc', 'index.html')
 
     if not os.path.isfile(html_path):
         print(html_path)
