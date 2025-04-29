@@ -28,10 +28,10 @@ void test_logging() {
   q_string_t msg = q_new_string("This is a q_string_t log message.");
 
   q_logf_string(OK msg);
-  q_logf_char(ERR "This is an error log.");
-  q_logf_char(WARN "This is a warning log.");
-  q_logf_char(INFO "This is an info log.");
-  q_logf_char(FATAL "This is a fatal log.");
+  q_logf(ERR "This is an error log.");
+  q_logf(WARN "This is a warning log.");
+  q_logf(INFO "This is an info log.");
+  q_logf(FATAL "This is a fatal log.");
 }
 
 void test_files() {
@@ -44,11 +44,11 @@ void test_files() {
     printf("%sFailed to write string to file%s\n", QUARK_RED, QUARK_RESET);
   }
 
-  if (q_write_char("test_output2.txt", "Another hello!") != 0) {
+  if (q_write("test_output2.txt", "Another hello!") != 0) {
     printf("%sFailed to write char to file%s\n", QUARK_RED, QUARK_RESET);
   }
 
-  if (q_mkdir_char("test_dir") != 0) {
+  if (q_mkdir("test_dir") != 0) {
     printf("%sFailed to create directory%s\n", QUARK_RED, QUARK_RESET);
   }
 

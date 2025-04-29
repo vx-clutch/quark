@@ -12,6 +12,8 @@ q_string_t q_strcpy(q_string_t *, q_string_t *);
 /*q_string_t q_strcat(q_string_t, q_string_t);*/
 /*q_string_t q_strcmp(q_string_t, q_string_t);*/
 
+#define qstr(x) q_new_string(x)
+
 // Logging
 #ifndef QUARK_PACKAGE
 #define QUARK_PACKAGE "quarks"
@@ -39,12 +41,12 @@ typedef enum {
 } q_level_t;
 
 int q_logf_string(q_level_t, q_string_t, ...);
-int q_logf_char(q_level_t, char *, ...);
+int q_logf(q_level_t, char *, ...);
 
 // Files
 int q_write_string(q_string_t, q_string_t, ...);
-int q_write_char(char *, char *, ...);
+int q_write(char *, char *, ...);
 int q_mkdir_string(q_string_t);
-int q_mkdir_char(char *);
+int q_mkdir(char *);
 
 #endif

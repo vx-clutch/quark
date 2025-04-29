@@ -25,7 +25,7 @@ int q_logf_string(q_level_t level, q_string_t src, ...) {
   return 0;
 }
 
-int q_logf_char(q_level_t level, char *src, ...) {
+int q_logf(q_level_t level, char *src, ...) {
   va_list args;
   va_start(args, src);
   switch (level) {
