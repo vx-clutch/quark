@@ -27,7 +27,7 @@ void test_logging() {
 
   q_string_t msg = q_new_string("This is a q_string_t log message.");
 
-  q_logf_string(OK msg);
+  q_logf(OK msg);
   q_logf(ERR "This is an error log.");
   q_logf(WARN "This is a warning log.");
   q_logf(INFO "This is an info log.");

@@ -41,7 +41,12 @@ typedef enum {
 } q_level_t;
 
 int q_logf_string(q_level_t, q_string_t, ...);
-int q_logf(q_level_t, char *, ...);
+int q_logf_char(q_level_t, char *, ...);
+
+#define q_logf(X, K, ...) _Generic((K), \
+  q_string_t : q_logf_string,           \
+  char * : q_logf_char)                 \
+  (X, K __VA_OPT__(, ) ##__VA_ARGS__)
 
 // Files
 int q_write_string(q_string_t, q_string_t, ...);
@@ -49,4 +54,5 @@ int q_write(char *, char *, ...);
 int q_mkdir_string(q_string_t);
 int q_mkdir(char *);
 
-#endif
+#endif // QUARKS_H
+
