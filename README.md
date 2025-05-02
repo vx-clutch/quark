@@ -2,11 +2,7 @@
 A simple library that adds little features.
 ## Build
 ### Linux
-`make`
-
-then
-
-`make install`
+```make``` then ```make install```
 ## Usage
 See [docs](https://vx-clutch.github.io/quark/) for specific information on how to use Quark
 ### Linking
