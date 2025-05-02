@@ -45,8 +45,8 @@ int q_logf_char(q_level_t, char *, ...);
 
 #define q_logf(X, K, ...) _Generic((K), \
   q_string_t : q_logf_string,           \
-  char * : q_logf_char)                 \
-  (X, K __VA_OPT__(, ) ##__VA_ARGS__)
+  char *     : q_logf_char              \
+)(X, K, ##__VA_ARGS__)
 
 // Files
 int q_write_string(q_string_t, q_string_t, ...);
