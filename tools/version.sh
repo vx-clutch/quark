@@ -1,11 +1,11 @@
 #!/bin/sh
 
+major_version="0.0"
+tag="alpha"
+
 if test -d .git ; then
 if type git >/dev/null 2>&1 ; then
-git describe --tags --match 'v[0-9]*' 2>/dev/null \
-sed -e 's/^v//' -e 's/-/-git-/'
-else
-sed 's/$/-git/' < VERSION
+  printf "%s.%s-%s" $major_version "$(git rev-list --count HEAD)" $tag > VERSION
 fi
 else
 cat VERSION
