@@ -1,23 +1,9 @@
-# Quark
-A simple library that adds little features.
-## Build
-### Linux
-```make``` then ```make install```
-## Usage
-See [docs](https://vx-clutch.github.io/quark/) for specific information on how to use Quark
-### Linking
-Compile with `-lq` and include `quark.h` in your project
-## Examples
-### Logging
-```
-#include "quarks.h"
+# quark lib
+quark is an BSD licensed library for C, it is a collection of functions that are useful for creating small programs in C.
 
-int
-main(void)
-{
-    q_logf(OK "Hello, World!");
-    q_string_t qstr = new_string("Hello, Quark!");
-    qlogf(OK qstr);
-    return 0;
-}
+The library is currently in its alpha stages of development, this means can and will change.
+
+For basic installation, see the included INSTALL file. Information on the rest of the library can be found at the website:
+```
+https://vx-clutch.github.io/quark/
 ```
