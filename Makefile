@@ -27,3 +27,4 @@ test: main.c all
 	@echo
 	@./main
 	@rm main
+.PHONY: test clean bindir
