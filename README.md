@@ -1,18 +1,27 @@
 # Quark
-Entries marked with a '*' are require for compelation.
-## Defines
-### QUARK_PACKAGE*
-The name of the program. Used in q_logf()
-## Types
-### q_string_t
-Custom string type that improves saftey, and makes them easier to work with.
-## Functions
-### q_logf(__level_t, q_string_t, ...)
-Takes in the levels of:
-* OK
-* ERR
-* WARN
-* INFO
-* FATAL
+A simple library that adds little features.
+## Build
+### Linux
+`make`
 
-Ex: `q_logf(OK "Hello, QUARK!");`
+then
+
+`make install`
+## Usage
+See [docs](https://vx-clutch.github.io/quark/) for specific information on how to use Quark
+### Linking
+Compile with `-lq` and include `quark.h` in your project
+## Examples
+### Logging
+```
+#include "quarks.h"
+
+int
+main(void)
+{
+    q_logf(OK "Hello, World!");
+    q_string_t qstr = new_string("Hello, Quark!");
+    qlogf(OK qstr);
+    return 0;
+}
+```
