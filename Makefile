@@ -1,7 +1,7 @@
-CC = gcc
-CFLAGS = -std=c11 -fPIC
-SRCS = $(wildcard libq/*.c)
-OBJS = $(SRCS:libq/%.c=bin/obj/%.o)
+CC := gcc
+CFLAGS := -std=c11 -fPIC
+SRCS := $(wildcard libq/*.c)
+OBJS := $(SRCS:libq/%.c=bin/obj/%.o)
 
 all: bindir libq.so libq.a
 
