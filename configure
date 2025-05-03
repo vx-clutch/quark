@@ -1,1 +1,8 @@
 #!/bin/sh
+
+echo "NOT IMPL"
+exit 1
+
+# TODO:
+#   - checks for needed binarys
+#   - create config.mak based on dist/config.mak
