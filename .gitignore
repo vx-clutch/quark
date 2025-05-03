@@ -1,0 +1,5 @@
+*.o
+*.a
+*.so
+config.mak
+/obj/
