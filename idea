@@ -1,0 +1,1 @@
+use void type for the functions and the check the size to see if it is a char* or a qstr.
