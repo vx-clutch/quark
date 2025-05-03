@@ -7,7 +7,7 @@ includedir = $(prefix)/include
 libdir = $(prefix)/lib
 syslibdir = /lib
 
-SRCS = 
+SRCS = $(wildcard src/*.c)
 
 -include config.mak
 

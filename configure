@@ -1,8 +1,27 @@
 #!/bin/sh
 
-echo "NOT IMPL"
-exit 1
-
 # TODO:
-#   - checks for needed binarys
+#   - checks for needed binaries
 #   - create config.mak based on dist/config.mak
+
+usage() {
+cat <<EOF
+Usage: $0 [OPTION]... [VAR=VALUE]...
+
+To assign environment variables (e.g., CC, CFLAGS...), specify them as
+VAR=VALUE.
+
+  CC      C compiler command [detected]
+  CFLAGS  C compiler flags [-g, ...]
+
+EOF
+exit 0
+}
+
+prefix=/usr/local/quark
+exec_prefix=/usr/local
+syslibdir=/lib
+
+if [ $# -eq 0 ]; then
+usage
+fi
