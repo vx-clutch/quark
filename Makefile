@@ -51,7 +51,7 @@ endif
 clean:
 	rm -rf $(OBJ_DIR) lib
 
-clean-dist:
+clean-dist: clean
 	rm config.mak
 
 .PHONY: all clean clean-dist
