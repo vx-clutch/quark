@@ -18,10 +18,25 @@ EOF
 exit 0
 }
 
+if [ "$1" == "help" ]; then
+usage
+fi
+
 prefix=/usr/local/quark
 exec_prefix=/usr/local
 syslibdir=/lib
 
-if [ $# -eq 0 ]; then
-usage
+compilers=( "gcc" "clang" )
+found="NULL"
+for compiler in "${compilers[@]}"; do
+printf "checking for %s..." "$compiler"
+if command -v "$compiler" &> /dev/null; then
+printf " %s\n" "$compiler"
+found="$compiler"
+break
+else
+printf " Not found\n"
 fi
+echo "No C compiler found, exiting"
+exit 1
+done

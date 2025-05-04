@@ -12,9 +12,8 @@ libdir = $(prefix)/lib
 syslibdir = /lib
 
 SRCS = $(wildcard src/*.c)
-OBJS = $(SRCS:.c=.o)
-
-OBJ_DIR = obj/
+OBJ_DIR = obj
+OBJS = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 STATIC_LIB = lib/libq.a
 SHARED_LIB = lib/libq.so
@@ -32,23 +31,27 @@ else
 
 all: $(ALL_LIBS)
 
-$(ALL_LIBS): | $(OBJ_DIRS)
-
 $(OBJ_DIR):
 	mkdir -p $@
 
-$(STATIC_LIB): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^
+lib:
+	mkdir -p $@
 
-$(SHARED_LIB): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^
+$(STATIC_LIB): $(OBJS) | lib
+	ar rcs $@ $^
 
-$(OBJ_DIR)/%.o: $(SRCS):/%.c
+$(SHARED_LIB): $(OBJS) | lib
+	$(CC) -shared -o $@ $^
+
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 endif
 
 clean:
-	rm -rf obj lib
+	rm -rf $(OBJ_DIR) lib
 
-.PHONY all clean
+clean-dist:
+	rm config.mak
+
+.PHONY: all clean clean-dist
