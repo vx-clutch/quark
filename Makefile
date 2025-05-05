@@ -12,6 +12,7 @@ libdir = $(prefix)/lib
 syslibdir = /lib
 
 SRCS = $(wildcard src/*.c)
+HEADERS = $(wildcard include/*.h)
 OBJ_DIR = obj
 OBJS = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
@@ -29,7 +30,7 @@ all:
 
 else
 
-all: $(ALL_LIBS)
+all: clean $(ALL_LIBS)
 
 $(OBJ_DIR):
 	mkdir -p $@
@@ -37,21 +38,21 @@ $(OBJ_DIR):
 lib:
 	mkdir -p $@
 
-$(STATIC_LIB): $(OBJS) | lib
+$(STATIC_LIB): $(OBJS) $(HEADERS) | lib
 	ar rcs $@ $^
 
-$(SHARED_LIB): $(OBJS) | lib
-	$(CC) -shared -o $@ $^
+$(SHARED_LIB): $(OBJS) $(HEADERS) | lib
+	$(CC) -I./include/ -shared -o $@ $(OBJS)
 
 $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 endif
 
 clean:
 	rm -rf $(OBJ_DIR) lib
 
-clean-dist: clean
+dist-clean: clean
 	rm config.mak
 
 .PHONY: all clean clean-dist

@@ -14,6 +14,7 @@ EOF
 exit 0
 }
 
+echo () { printf "%s\n" "$*" ; }
 cmdexists () { type "$1" >/dev/null 2>&1 ; }
 trycc () { test -z "$CC" && cmdexists "$1" && CC=$1 ; }
 
@@ -39,24 +40,21 @@ trycc clang
 printf "%s\n" "$CC"
 
 printf "checking weather C compiler works... "
-status="no"
+status="fail"
 tmpc="$(mktemp -d)/test.c"
-cat > "$tmpc" > <<EOF
-int main(void) { return 0; }
-EOF
-if ! "$CC" "$tmpc" -o "$(mktemp -d)/test" >/dev/null 2>&1; then
-status="yes"
-fi
-printf "%s\n" "$status"
-if [ status != "yes" ]; then
+echo "typedef int x;" > "$tmpc"
+if output=$($CC $CFLAGS -c -o /dev/null "$tmpc" 2>&1) ; then
+printf "yes\n"
+else
+printf "no; %s\n" "$output"
 exit 1
 fi
 
 printf "creating config.mak... "
-printf "%s\n" "$prefix" > config.mak
-printf "%s\n" "$exec_prefix" >> config.mak
-printf "%s\n" "$syslibdir" >> config.mak
-printf "%s\n" "$CFLAGS" >> config.mak
-printf "%s\n" "$LDFLAGS" >> config.mak
-printf "%s\n" "$CC" >> config.mak
+printf "PREFIX=%s\n" "$prefix" > config.mak
+printf "EXEC_PREFIX=%s\n" "$exec_prefix" >> config.mak
+printf "SYSLIBDIR=%s\n" "$syslibdir" >> config.mak
+printf "CFLAGS=%s\n" "$CFLAGS" >> config.mak
+printf "LDFLAGS=%s\n" "$LDFLAGS" >> config.mak
+printf "CC=%s\n" "$CC" >> config.mak
 printf "done\n"
