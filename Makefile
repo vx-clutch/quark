@@ -6,13 +6,13 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2
 LDFLAGS =
 
-prefix = /usr/local/quark
+prefix = /usr/local/
 includedir = $(prefix)/include
 libdir = $(prefix)/lib
 syslibdir = /lib
 
-SRCS = $(wildcard src/*.c)
-HEADERS = $(wildcard include/*.h)
+SRCS = $(wildcard src/**/*.c)
+HEADERS = $(wildcard include/**/*.h)
 OBJ_DIR = obj
 OBJS = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
@@ -50,12 +50,15 @@ $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 endif
 
 install:
-	install -d $(prefix)/$(SHARED_LIB)
+	install -d $(DESTDIR)$(bindir)
+	install -m 755 $(SHARED_LIB) $(DESTDIR)$(bindir)
+	install -d $(DESTDIR)$(includedir)
+	install -m 644 $(HEADERS) $(DESTDIR)$(includedir)
 
 uninstall:
-	rm -rf $(DESTDIR)$(libdir)
+	rm -f $(DESTDIR)$(bindir)/$(notdir $(SHARED_LIB))
 	rm -rf $(DESTDIR)$(includedir)
-
+	
 clean:
 	rm -rf $(OBJ_DIR) lib
 
