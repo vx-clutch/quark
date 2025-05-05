@@ -49,10 +49,17 @@ $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 
 endif
 
+install:
+	install -d $(prefix)/$(SHARED_LIB)
+
+uninstall:
+	rm -rf $(DESTDIR)$(libdir)
+	rm -rf $(DESTDIR)$(includedir)
+
 clean:
 	rm -rf $(OBJ_DIR) lib
 
 dist-clean: clean
 	rm config.mak
 
-.PHONY: all clean clean-dist
+.PHONY: all clean dist-clean install uninstall
