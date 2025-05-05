@@ -6,13 +6,13 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2
 LDFLAGS =
 
-prefix = /usr/local/
+prefix = /usr/local
 includedir = $(prefix)/include
 libdir = $(prefix)/lib
 syslibdir = /lib
 
-SRCS = $(wildcard src/**/*.c)
-HEADERS = $(wildcard include/**/*.h)
+SRCS = $(wildcard **/*.c)
+HEADERS = $(wildcard **/*.h)
 OBJ_DIR = obj
 OBJS = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
@@ -50,15 +50,13 @@ $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 endif
 
 install:
-	install -d $(DESTDIR)$(bindir)
-	install -m 755 $(SHARED_LIB) $(DESTDIR)$(bindir)
-	install -d $(DESTDIR)$(includedir)
-	install -m 644 $(HEADERS) $(DESTDIR)$(includedir)
+	@echo "NOT IMPL"
+	exit 1
 
 uninstall:
-	rm -f $(DESTDIR)$(bindir)/$(notdir $(SHARED_LIB))
-	rm -rf $(DESTDIR)$(includedir)
-	
+	@echo "NOT IMPL"
+	exit 1
+
 clean:
 	rm -rf $(OBJ_DIR) lib
 
