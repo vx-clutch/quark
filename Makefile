@@ -11,10 +11,10 @@ includedir = $(prefix)/include
 libdir = $(prefix)/lib
 syslibdir = /lib
 
-SRCS = $(wildcard **/*.c)
-HEADERS = $(wildcard **/*.h)
+SRCS = $(wildcard $(srcdir)/src/**/*.c)
+HEADERS = $(wildcard $(srcdor)/src/**/*.h)
 OBJ_DIR = obj
-OBJS = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+OBJS = $(SRCS:.c=.o)
 
 STATIC_LIB = lib/libq.a
 SHARED_LIB = lib/libq.so

@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <stdio.h>
+#include "../../include/log.h"
 
 #ifndef QUARK_PACKAGE
 #define QUARK_PACKAGE "quarks"
