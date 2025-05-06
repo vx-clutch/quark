@@ -21,7 +21,7 @@ trycc () { test -z "$CC" && cmdexists "$1" && CC=$1 ; }
 prefix=/usr/local/quark
 exec_prefix=/usr/local
 syslibdir=/lib
-CFLAGS=
+CFLAGS="-Wall -Wextra -O2 -fPIC"
 LDFLAGS=
 CC=
 
