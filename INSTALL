@@ -1,0 +1,39 @@
+
+Quick Installation Guide for quark lib
+======================================
+
+There are two main ways to build quark depending on your usage
+case: System-wide, and locally. System-wide would allow any
+C source files to access the functionality of the library,
+and locally, which would allow you to use for a single
+project, or just test out the functionality.
+
+
+Build Prerequisites
+-------------------
+
+The only binarys needed to build quark are GNU Make and a
+C11 or newer compiler.
+
+The system used to build quark does not need to be
+Linux-based, however it has only be tested on such.
+
+
+Build and Installation Procedure
+--------------------------------
+
+To build and install quark:
+
+ 1. Run the provided configure script from the top-level source
+    directory
+
+ 2. Run "make" to compile.
+
+ 3. Optionally, run "make install" with appropriate privileges
+    to write to the target location.
+
+Notes on Linking
+------------------------
+
+If you want to compile with quark lib you need to link
+with "-lq", as long as it was installed system-wide.

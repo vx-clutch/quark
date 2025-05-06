@@ -1,2 +1,5 @@
 *.o
-bin/
+*.a
+*.so
+config.mak
+/obj/

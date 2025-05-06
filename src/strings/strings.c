@@ -1,4 +1,4 @@
-#include "../quarks.h"
+#include "../../include/strings.h"
 
 q_string_t q_new_string(char *src) {
   int length = 0;

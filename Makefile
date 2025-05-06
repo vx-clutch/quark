@@ -1,30 +1,63 @@
-CC := gcc
-CFLAGS := -std=c11 -fPIC
-SRCS := $(wildcard libq/*.c)
-OBJS := $(SRCS:libq/%.c=bin/obj/%.o)
+srcdir = .
+exec_prefix = /usr/local
+bindir = $(exec_prefix)/bin
 
-all: bindir libq.so libq.a
+CC = gcc
+CFLAGS = -Wall -Wextra -O2 -fPIC
+LDFLAGS =
 
-bindir:
-	@mkdir -p bin/share bin/archive bin/obj
+prefix = /usr/local
+includedir = $(prefix)/include
+libdir = $(prefix)/lib
+syslibdir = /lib
 
-bin/obj/%.o: libq/%.c quarks.h
+SRCS = $(wildcard $(srcdir)/src/**/*.c)
+HEADERS = $(wildcard $(srcdir)/src/**/*.h)
+OBJS = $(addprefix obj/,$(patsubst $(srcdir)/src/%,obj/%,$(patsubst %.c,%.o,$(notdir $(SRCS)))))
+
+STATIC_LIB = lib/libq.a
+SHARED_LIB = lib/libq.so
+ALL_LIBS = $(STATIC_LIB) $(SHARED_LIB)
+
+-include config.mak
+
+ifeq ($(wildcard config.mak),)
+all:
+	@echo "File config.mak not found, run configure"
+	@exit 1
+else
+
+all: clean lib obj $(ALL_LIBS)
+
+obj:
+	mkdir -p $@
+lib:
+	mkdir -p $@
+
+obj/%.o: $(srcdir)/src/**/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-libq.so: $(OBJS)
-	$(CC) -shared $(CFLAGS) -o bin/share/libq.so $(OBJS)
+$(STATIC_LIB): $(OBJS)
+	ar rcs $@ $^
 
-libq.a: $(OBJS)
-	ar rcs bin/archive/libq.a $(OBJS)
+$(SHARED_LIB): $(OBJS)
+	$(CC) -I./include/ -shared $(CFLAGS) -o $@ $(OBJS)
+
+endif
+
+install:
+	@echo "NOT IMPL"
+	exit 1
+
+uninstall:
+	@echo "NOT IMPL"
+	exit 1
 
 clean:
-	@-rm -rf bin
-	@-rm main
-	@-rm $(OBJS)
+	rm -rf obj lib
 
-test: main.c all
-	@$(CC) -o main main.c -Lbin/share -lq -Wl,-rpath=bin/share
-	@echo
-	@./main
-	@rm main
-.PHONY: test clean bindir
+dist-clean: clean
+	rm config.mak
+
+.PHONY: all clean dist-clean install uninstall
+
