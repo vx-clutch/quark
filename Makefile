@@ -3,7 +3,7 @@ exec_prefix = /usr/local
 bindir = $(exec_prefix)/bin
 
 CC = gcc
-CFLAGS = -Wall -Wextra -O2
+CFLAGS = -Wall -Wextra -O2 -fPIC
 LDFLAGS =
 
 prefix = /usr/local
@@ -12,9 +12,8 @@ libdir = $(prefix)/lib
 syslibdir = /lib
 
 SRCS = $(wildcard $(srcdir)/src/**/*.c)
-HEADERS = $(wildcard $(srcdor)/src/**/*.h)
-OBJ_DIR = obj
-OBJS = $(SRCS:.c=.o)
+HEADERS = $(wildcard $(srcdir)/src/**/*.h)
+OBJS = $(addprefix obj/,$(patsubst $(srcdir)/src/%,obj/%,$(patsubst %.c,%.o,$(notdir $(SRCS)))))
 
 STATIC_LIB = lib/libq.a
 SHARED_LIB = lib/libq.so
@@ -23,29 +22,26 @@ ALL_LIBS = $(STATIC_LIB) $(SHARED_LIB)
 -include config.mak
 
 ifeq ($(wildcard config.mak),)
-
 all:
 	@echo "File config.mak not found, run configure"
 	@exit 1
-
 else
 
-all: clean $(ALL_LIBS)
+all: clean lib obj $(ALL_LIBS)
 
-$(OBJ_DIR):
+obj:
 	mkdir -p $@
-
 lib:
 	mkdir -p $@
 
-$(STATIC_LIB): $(OBJS) $(HEADERS) | lib
+obj/%.o: $(srcdir)/src/**/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(STATIC_LIB): $(OBJS)
 	ar rcs $@ $^
 
-$(SHARED_LIB): $(OBJS) $(HEADERS) | lib
-	$(CC) -I./include/ -shared -o $@ $(OBJS)
-
-$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -fPIC -c $< -o $@
+$(SHARED_LIB): $(OBJS)
+	$(CC) -I./include/ -shared $(CFLAGS) -o $@ $(OBJS)
 
 endif
 
@@ -58,9 +54,10 @@ uninstall:
 	exit 1
 
 clean:
-	rm -rf $(OBJ_DIR) lib
+	rm -rf obj lib
 
 dist-clean: clean
 	rm config.mak
 
 .PHONY: all clean dist-clean install uninstall
+
