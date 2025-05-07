@@ -5,8 +5,8 @@ tag="alpha"
 
 if test -d .git ; then
 if type git >/dev/null 2>&1 ; then
-  printf "%s.%s-%s" $major_version "$(git rev-list --count HEAD)" $tag > VERSION
+  printf "%s.%s-%s" $major_version "$(git rev-list --count HEAD)" $tag > version
 fi
 else
-cat VERSION
+cat version
 fi
