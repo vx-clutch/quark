@@ -24,8 +24,9 @@ typedef enum {
   warn,
   info,
   fatal,
+  NIL,
 } q_level_t;
 
-int q_logf(q_level_t, char *, ...);
+int q_logf(q_level_t, char *, ...); // q_logf(OK Hello, World!);
 
 #endif // Q_LOG_H
