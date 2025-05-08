@@ -1,4 +1,4 @@
-#include "../../include/strings.h"
+#include "../../include/lib.h"
 
 #define Q_NULL ((void *) 0)
 
@@ -24,15 +24,15 @@ q_string_t q_strcpy(q_string_t *dest, q_string_t *src) {
 }
 
 q_string_t q_strcat(q_string_t *dest, q_string_t *src) {
-  q_strcpy(q_string_t.as_str + q_string_t.len, src);
+  dest->as_str += dest->len;
   dest->len += src->len;
+  q_strcpy(dest, src);
+  dest->as_str -= dest->len;
   return *dest;
 }
 
 int q_strcmp(q_string_t *a, q_string_t *b) {
-  if (a->len != b->len) {
-    return 1;
-  }
+  if (a->len != b->len) return 1;
   for (int i = 0; i < a->len; i++) {
     if (a->as_str[i] != b->as_str[i]) {
       return 1;

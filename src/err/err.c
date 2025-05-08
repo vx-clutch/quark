@@ -1,5 +1,4 @@
-#include "../../include/err.h"
-#include "../../include/log.h"
+#include "../../include/lib.h"
 #include <stdlib.h>
 #include <stdarg.h>
 
