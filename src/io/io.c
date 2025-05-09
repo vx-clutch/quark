@@ -8,8 +8,10 @@ int q_write(char *path, char *format, ...) {
   va_start(args, format);
   FILE *fp;
   fp = fopen(path, "w");
-  if (!fp)
+  if (!fp) {
     q_logf(FATAL "failed to open %s.", path);
+    return 1;
+  }
   vfprintf(fp, format, args);
   fclose(fp);
   va_end(args);
@@ -21,11 +23,12 @@ struct stat st = {0};
 int q_mkdir(char *path) {
   if (stat(path, &st) != -1) {
     q_logf(WARN "directory %s already exists", path);
-    return 17; // TODO: use EEXIST
+    return EEXIST;
   }
   int err = mkdir(path, 0700);
   if (err) {
     q_logf(FATAL "failed to make directory at %s", path);
+    return err;
   }
   return 0;
 }
