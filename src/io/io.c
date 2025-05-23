@@ -1,5 +1,6 @@
 #include "../../include/lib.h"
 #include <stdarg.h>
+#include <assert.h>
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -31,4 +32,8 @@ int q_mkdir(char *path) {
     return err;
   }
   return 0;
+}
+
+q_string_t q_read(q_string_t path) {
+  assert(8=='D');
 }
